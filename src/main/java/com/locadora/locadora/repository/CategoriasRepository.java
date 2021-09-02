@@ -1,15 +1,13 @@
 package com.locadora.locadora.repository;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.locadora.locadora.models.Categoria;
+import com.locadora.locadora.models.Categorias;
 
-public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
+public interface CategoriasRepository extends JpaRepository<Categorias, Long> {
 
-	Categoria findById(long id);
+	Categorias findById(long id);
 
-	Categoria deleteById(long id);
-			
-	
+	Categorias deleteById(long id);
+
 }

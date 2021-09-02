@@ -13,17 +13,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="Categoria_TB")
+@Table(name = "Idiomas_TB")
 @Getter
 @Setter
 @AllArgsConstructor
-public class Categoria implements Serializable{
+public class Idioma implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long Id_Categoria;
-	public String Nome_categoria;
-	
+	public Long ID;
+	public String Nome;
+	public int Tag;
+
 }

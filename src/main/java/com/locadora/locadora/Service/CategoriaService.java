@@ -4,30 +4,32 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.locadora.locadora.models.Categoria;
-import com.locadora.locadora.repository.CategoriaRepository;
+import com.locadora.locadora.models.Categorias;
+import com.locadora.locadora.repository.CategoriasRepository;
 
 @Service
 public class CategoriaService {
 
-@Autowired
-CategoriaRepository categoriaRepository;
+	@Autowired
+	CategoriasRepository categoriaRepo;
 
 //Cadastro de Categoria / Atualiza caso passe a Id já cadastrada
-public Categoria salvarCategoria(Categoria cat) {
-		return categoriaRepository.save(cat);
+	public Categorias salvarCategoria(Categorias cat) {
+		return categoriaRepo.save(cat);
 	}
+
 //listagem de Categoria Geral e por Id ///////////////////////
-public List<Categoria> listarCategoria(){
-return categoriaRepository.findAll();
+	public List<Categorias> listarCategoria() {
+		return categoriaRepo.findAll();
 	}
-public Categoria listarporid(long id){
-	 return categoriaRepository.findById(id);
+
+	public Categorias listarporid(long id) {
+		return categoriaRepo.findById(id);
 	}
 
 //Deleta Categoria por Id
-	public Categoria deletarcategoria(long id){
-		return categoriaRepository.deleteById(id);
+	public Categorias deletarcategoria(long id) {
+		return categoriaRepo.deleteById(id);
 	}
 
 }

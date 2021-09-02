@@ -9,32 +9,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.locadora.locadora.Service.CategoriaService;
-import com.locadora.locadora.models.Categoria;
+import com.locadora.locadora.models.Categorias;
 
 @RestController
-@RequestMapping(value = "/CategoriaAPI")
+@RequestMapping(value = "/Categoria")
 public class CategoriaControler {
 
 	@Autowired
 	CategoriaService categoriaService;
-	
-	@PostMapping("/salvarCategoria")
-	public Categoria CadastroCategoria(@RequestBody Categoria cat) {
+
+	@PostMapping("/save")
+	public Categorias CadastroCategoria(@RequestBody Categorias cat) {
 		return categoriaService.salvarCategoria(cat);
-	
+
 	}
 	
-	@GetMapping("/ListarCategoria")
-	public List<Categoria> ListaCategoria(){
+	@GetMapping("/show")
+	public List<Categorias> ListaCategoria() {
 		return categoriaService.listarCategoria();
-		
+
 	}
-	@GetMapping("/ListarCategoria/{id}")
-	public Categoria listarporid(@PathVariable(value = "id" )long id){
-		 return categoriaService.listarporid(id);
-		}
-	
-	
+
+	@GetMapping("/show/{id}")
+	public Categorias listarporid(@PathVariable(value = "id") long id) {
+		return categoriaService.listarporid(id);
+	}
+
 }
