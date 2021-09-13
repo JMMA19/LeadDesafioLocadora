@@ -3,9 +3,9 @@
  
   import org.springframework.beans.factory.annotation.Autowired; import
   org.springframework.stereotype.Service;
- 
-  import com.locadora.locadora.models.Idioma;
-import com.locadora.locadora.repository.IdiomaRepository;
+
+import com.locadora.locadora.Models.Idioma;
+import com.locadora.locadora.Repository.IdiomaRepository;
  
   @Service public class IdiomasService {
   

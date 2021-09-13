@@ -1,12 +1,16 @@
-package com.locadora.locadora.models;
+package com.locadora.locadora.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -19,61 +23,70 @@ import lombok.Setter;
 @Entity
 @Table(name = "Usuarios_TB")
 @AllArgsConstructor
-@Getter @Setter
-public class Usuario implements Serializable, UserDetails{
+@Getter
+@Setter
+public class Usuario implements Serializable, UserDetails {
 	private static final long serialVersionUID = 1L;
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long IdUser;
 
-public String Nome;
+	public String Nome;
 
-public String CPF;
+	public String CPF;
 
-public int Telefone;
+	public int Telefone;
 
-public String Email;
+	public String Email;
 
-public String Senha;
+	public String Senha;
 
-public String Perfil;
-
-public String Idioma;
+	public String Idioma;
 	
+	@OneToMany(fetch = FetchType.EAGER)
+	public List<Perfil> Perfil = new ArrayList<>();
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return this.Senha;
 	}
+
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return this.CPF;
 	}
+
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
+
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
+
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
+
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public Long getIdUser() {
+		return IdUser;
+	}
+
+	public void setIdUser(Long IdUser) {
+		this.IdUser = IdUser;
 	}
 
 }

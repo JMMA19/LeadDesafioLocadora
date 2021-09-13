@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.locadora.locadora.models.Categorias;
-import com.locadora.locadora.repository.CategoriasRepository;
+
+import com.locadora.locadora.Models.Categoria;
+import com.locadora.locadora.Repository.CategoriasRepository;
 
 @Service
 public class CategoriaService {
@@ -14,21 +15,21 @@ public class CategoriaService {
 	CategoriasRepository categoriaRepo;
 
 //Cadastro de Categoria / Atualiza caso passe a Id já cadastrada
-	public Categorias salvarCategoria(Categorias cat) {
+	public Categoria salvarCategoria(Categoria cat) {
 		return categoriaRepo.save(cat);
 	}
 
 //listagem de Categoria Geral e por Id ///////////////////////
-	public List<Categorias> listarCategoria() {
+	public List<Categoria> listarCategoria() {
 		return categoriaRepo.findAll();
 	}
 
-	public Categorias listarporid(long id) {
+	public Categoria listarporid(long id) {
 		return categoriaRepo.findById(id);
 	}
 
 //Deleta Categoria por Id
-	public Categorias deletarcategoria(long id) {
+	public Categoria deletarcategoria(long id) {
 		return categoriaRepo.deleteById(id);
 	}
 

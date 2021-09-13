@@ -1,9 +1,9 @@
-package com.locadora.locadora.repository;
+package com.locadora.locadora.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.locadora.locadora.models.Usuario;
+import com.locadora.locadora.Models.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	

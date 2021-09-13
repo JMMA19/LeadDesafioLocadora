@@ -1,4 +1,4 @@
-package com.locadora.locadora.models;
+package com.locadora.locadora.Models;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @Table(name = "Filme_tb")
-public class Filmes implements Serializable {
+public class Filme implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,6 +32,6 @@ public class Filmes implements Serializable {
 	@ManyToOne
 	public Idioma idioma;
 	@ManyToOne
-	public Categorias categorias;
+	public Categoria categorias;
 
 }

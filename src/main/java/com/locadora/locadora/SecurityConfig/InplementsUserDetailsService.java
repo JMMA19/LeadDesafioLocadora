@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import com.locadora.locadora.models.Usuario;
-import com.locadora.locadora.repository.UsuarioRepository;
+import com.locadora.locadora.Models.Usuario;
+import com.locadora.locadora.Repository.UsuarioRepository;
 @Repository 
 public class InplementsUserDetailsService implements UserDetailsService{
 	@Autowired

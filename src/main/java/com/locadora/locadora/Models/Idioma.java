@@ -1,4 +1,4 @@
-package com.locadora.locadora.models;
+package com.locadora.locadora.Models;
 
 import java.io.Serializable;
 
@@ -13,19 +13,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Categoria_TB")
+@Table(name = "Idiomas_TB")
 @Getter
 @Setter
 @AllArgsConstructor
-public class Categorias implements Serializable {
+public class Idioma implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long Id;
+	public Long ID;
 	public String Nome;
-	public String Tag;
-	public String Idioma;
+	public int Tag;
 
 }
