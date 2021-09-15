@@ -1,13 +1,11 @@
 package com.locadora.locadora.SecurityConfig;
 
-import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,13 +14,20 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.locadora.locadora.Repository.UsuarioRepository;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
-	
+	@Autowired
+	 private UsuarioRepository userRepository;
+
 	@Autowired
 	InplementsUserDetailsService inpUser;
+	
+	@Autowired
+	 private TokenServices tokenServices;
 	
 	@Override
 	@Bean
@@ -45,7 +50,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated() // obriga a autenticar user
 				.and().csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and().addFilterBefore(new FiltroDeAutentiacaoPotToken(), UsernamePasswordAuthenticationFilter.class);
+				.and().addFilterBefore(new FiltroDeAutentiacaoPotToken(tokenServices, userRepository), UsernamePasswordAuthenticationFilter.class);
 	}
 
 }

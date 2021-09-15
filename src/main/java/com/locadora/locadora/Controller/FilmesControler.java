@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.locadora.locadora.Models.Categoria;
 import com.locadora.locadora.Models.Filme;
 import com.locadora.locadora.Service.FilmesService;
 
@@ -26,7 +25,7 @@ public class FilmesControler {
 
 //Cadastro de Filmes / Atualiza caso passe a Id já cadastrada
 	@PostMapping("/save")
-		public Filme Salvarfilme(@RequestBody Filme filme) {
+		public ResponseEntity<Filme> Salvarfilme(@RequestBody Filme filme) {
 		return FilmeService.salvarFilme(filme);
 
 	}

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.locadora.locadora.Models.Usuario;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -28,5 +29,20 @@ public class TokenServices {
 				.setIssuedAt(hoje)
 				.setExpiration(ExpiraSession)
 				.signWith(SignatureAlgorithm.HS256, secret).compact();
+	}
+
+	public boolean Autenticatoken(String token) {
+		try {
+			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+	}
+
+	public Long getIdUsuario(String token) {
+		Claims body = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+		return Long.parseLong(body.getSubject());
 	}
 }

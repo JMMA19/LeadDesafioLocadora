@@ -1,8 +1,6 @@
 package com.locadora.locadora.Repository;
 
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import com.locadora.locadora.Models.Categoria;
 import com.locadora.locadora.Models.Filme;
