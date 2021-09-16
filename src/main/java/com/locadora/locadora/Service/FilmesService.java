@@ -1,10 +1,16 @@
 package com.locadora.locadora.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.locadora.locadora.Models.Categoria;
 import com.locadora.locadora.Models.Filme;
 import com.locadora.locadora.Repository.FilmesReposiory;
 
@@ -32,32 +38,29 @@ public class FilmesService {
 		return FilmeRepo.findAll();
 	}
 	// listagem de Filmes por titulo
-	//public ResponseEntity<List<Filme>> findByTitulo(@RequestParam String Titulo) {
-		//return new ResponseEntity<List<Filme>>(FilmeRepo.findByTitulo(Titulo), HttpStatus.OK);
-	//}
+	public ResponseEntity<List<Filme>> findByTitulo(@RequestParam String Titulo) {
+	return new ResponseEntity<List<Filme>>(FilmeRepo.findByTitulo(Titulo), HttpStatus.OK);
+	}
+	// listagem de Filmes por Categoria
+		public Optional<Filme> listarporCategoria(@RequestParam String tag) {
+			Categoria CategoriaPorTag = Categoriaservice.findByTag(tag);
+			Long Idcat = CategoriaPorTag.Id;
+		    Optional<Filme> pqp = FilmeRepo.findByCat(Idcat);
+			return  (pqp);
+		}
 	// listagem de Filmes por Id
-	public Filme listarporid(long id) {
-		return FilmeRepo.findById(id);
+	public Optional<Filme> listarporid(long id) {
+		Optional<Filme> F = FilmeRepo.findById(id);
+		return F;
 	}
 
 
-	/*
-	 * @ResponseBody public ResponseEntity<List<Filmes>> listarporCategorias(
-	 * Categorias categorias) { List<Filmes> filme =
-	 * FilmeRepo.findByCat(categorias);
-	 * 
-	 * //return new ResponseEntity <List<Filmes>>(filme, HttpStatus.OK); }
-	 */
+	
+ 
 
 	// Deleta Filmes por Id e Geral
 	public Filme deletarfilme(long id) {
 		return FilmeRepo.deleteById(id);
 	}
 
-	/*
-	 * deleta todos os dados da tabela.
-	 * 
-	 * @GetMapping("/deletarall") public void deletatodosfilmes(){
-	 * FilmeRepository.deleteAll();}
-	 */
 }

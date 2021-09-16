@@ -1,6 +1,10 @@
 package com.locadora.locadora.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.locadora.locadora.Models.Categoria;
 import com.locadora.locadora.Models.Filme;
@@ -8,10 +12,10 @@ import com.locadora.locadora.Models.Idioma;
 
 public interface FilmesReposiory extends JpaRepository<Filme, Long> {
 
-	//@Query(value = "select T from Filmes T where T.Titulo like %?1%")
-	//List<Filme> findByTitulo(String Titulos);
+	@Query(value = "select T from Filme T where T.Titulo like %?1%")
+	List<Filme> findByTitulo(String Titulos);
 
-	Filme findById(long id);
+	Optional<Filme> findById(long id);
 
 	Filme deleteById(long id);
 
@@ -19,7 +23,7 @@ public interface FilmesReposiory extends JpaRepository<Filme, Long> {
 
 	Filme save(Categoria categorias);
 
-	// @Query(value = "select c from Filmes cat where c.categorias like %?1%")
-	// List<Filmes> findByCat(Categorias categorias);
+	 @Query(value = "select i from Filme i where i.categorias like ?1")
+	 Optional<Filme> findByCat(long Idcat);
 
 }

@@ -3,6 +3,7 @@ package com.locadora.locadora.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,5 +37,8 @@ public class CategoriaControler {
 	public Categoria listarporid(@PathVariable(value = "id") long id) {
 		return categoriaService.listarporid(id);
 	}
-
+	@GetMapping("/showTag/{tag}")
+	public Categoria listarporid(@PathVariable(value = "tag") String tag) {
+		return categoriaService.findByTag(tag);
+	}
 }
