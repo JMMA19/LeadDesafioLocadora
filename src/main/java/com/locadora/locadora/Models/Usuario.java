@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -43,12 +44,12 @@ public class Usuario implements Serializable, UserDetails {
 
 	public String Idioma;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	public List<Perfil> Perfil = new ArrayList<>();
+	@ManyToOne
+	public Collection<? extends GrantedAuthority> Perfil;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return this.Perfil;
 	}
 
 	@Override

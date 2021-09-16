@@ -21,9 +21,11 @@ public interface FilmesReposiory extends JpaRepository<Filme, Long> {
 
 	Filme save(Idioma idiomas);
 
-	Filme save(Categoria categorias);
-
-	 @Query(value = "select i from Filme i where i.categorias like ?1")
-	 Optional<Filme> findByCat(long Idcat);
+	Filme save(Categoria categoria);
+	
+	List<Filme> findByCategoria(Categoria categoria);
+	
+	 //@Query(value = "select i from Filme i where i.categorias like ?1")
+	 //Optional<Filme> findByCat(long Idcat);
 
 }

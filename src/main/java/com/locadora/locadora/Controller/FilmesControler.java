@@ -12,13 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.locadora.locadora.Models.Categoria;
 import com.locadora.locadora.Models.Filme;
 import com.locadora.locadora.Service.FilmesService;
-
 
 @RestController
 @RequestMapping(value = "/Filmes")
@@ -27,50 +24,63 @@ public class FilmesControler {
 	@Autowired
 	FilmesService FilmeService;
 
-//Cadastro de Filmes / Atualiza caso passe a Id já cadastrada
-	@PostMapping("/save")
-	public Filme Salvarfilme(@RequestBody Filme filme) {
 
-	 return FilmeService.salvarFilme(filme);
-
-	 }
-
-//listagem de Filmes Geral e por Id ///////////////////////
-	@GetMapping("/show")
-	public List<Filme> listarfilmes() {
-		return FilmeService.listarfilmes();
+	@PostMapping("/save")//Cadastro de Filmes / Atualiza caso passe a Id já cadastrada
+	public ResponseEntity<?> Salvarfilme(@RequestBody Filme filme) {
+        	 try {
+        		 Filme ObjFilme = FilmeService.salvarFilme(filme);
+        		 if(ObjFilme.categoria == null || ObjFilme.idioma == null ) {
+        			 return new ResponseEntity<String>("Categoria ou Idioma não preenchido.", HttpStatus.BAD_REQUEST);
+        		 }else {
+        			 return new ResponseEntity<Filme>(ObjFilme, HttpStatus.OK);
+				}
+			} catch (Exception e) {
+				return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
 	}
 
-	@GetMapping("/show/{id}")
-	public ResponseEntity<?> listarporid(@PathVariable(value = "id") long id) {			
-		
+	@GetMapping("/show") // listagem de Filmes
+	public ResponseEntity<?> listarfilmes() {
+		try {
+			List<Filme> FilmeAll = FilmeService.listarfilmes();
+			if (FilmeAll != null) {
+				return new ResponseEntity<List<Filme>>(FilmeAll, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("Sem Registros", HttpStatus.NOT_FOUND);
+			}
+
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@GetMapping("/show/{id}") // listagem de Filmes por ID
+	public ResponseEntity<?> listarporid(@PathVariable(value = "id") long id) {
+
 		try {
 			Optional<Filme> FilmePorID = FilmeService.listarporid(id);
 			if (FilmePorID.isPresent()) {
 				return new ResponseEntity<Optional<Filme>>(FilmePorID, HttpStatus.OK);
-			}else {
-				return new ResponseEntity<String>("Sem Registros com essa Id = "+id,HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<String>("Sem Registros com essa Id = " + id, HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 
-@GetMapping("/showTitulo/{titulo}")
+	@GetMapping("/showTitulo/{titulo}") // listagem de Filmes por Titulo
+	public ResponseEntity<List<Filme>> listarportitulo(@PathVariable(value = "titulo") String titulo) {
 
-	public ResponseEntity<List<Filme>> listarportitulo(@PathVariable (value = "titulo") String titulo) {
-	
 		return FilmeService.findByTitulo(titulo);
 	}
 
-@GetMapping("/showCategoria/{tag}")
+	@GetMapping("/showCategoria/{tag}")// listagem de Filmes por Categoria
+	public List<Filme> listarporCategoria(@PathVariable(value = "tag") String tag) {
+		return FilmeService.listarporCategoria(tag);
+	}
 
-	 public  Optional<Filme> listarporCategoria(@PathVariable (value = "tag") String tag) {
-	 return FilmeService.listarporCategoria(tag);
-	 }
-
-//Deleta Filmes por Id e Geral  ///////////////////////
-	@PostMapping("/del/{id}")
+	@PostMapping("/del/{id}") // Deleta Filmes por Id
 	public Filme deletarfilme(@PathVariable(value = "id") long id) {
 		return FilmeService.deletarfilme(id);
 	}

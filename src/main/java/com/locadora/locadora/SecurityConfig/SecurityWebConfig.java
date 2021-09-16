@@ -46,7 +46,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().disable().authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/Filmes").permitAll()
+				.antMatchers(HttpMethod.POST, "/Filmes").hasAnyRole("ADM")
 				.antMatchers(HttpMethod.POST, "/Filmes/show").permitAll()
 			    .antMatchers(HttpMethod.POST,"/Auth").permitAll() 
 				.anyRequest().authenticated() // obriga a autenticar user
