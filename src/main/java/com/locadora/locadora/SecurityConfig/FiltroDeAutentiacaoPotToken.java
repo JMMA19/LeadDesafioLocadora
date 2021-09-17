@@ -40,11 +40,11 @@ public class FiltroDeAutentiacaoPotToken extends OncePerRequestFilter {
 	private void autenticarUser(String token) {
 		Long IdRecuperado = TokenServices.getIdUsuario(token);
 		Usuario usuario = userRepository.findById(IdRecuperado).get();
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null,
-				usuario.getAuthorities());
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+		System.out.println(usuario.Perfil);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		System.out.println(usuario.getUsername()  +  usuario.getAuthorities());
+		
 		
 	}
 

@@ -23,9 +23,10 @@ public class FilmesService {
 	IdiomasService IdiomaService;
 
 	// Cadastro de Filmes / Atualiza caso passe a Id já cadastrada public Filmes
-	public  Filme salvarFilme(Filme filme) {
-		Filme ObjFilme = FilmeRepo.save(filme);
-		return ObjFilme;
+	public Filme salvarFilme(Filme filme) {
+		Categoriaservice.salvarCategoria(filme.categoria);
+		IdiomaService.SalvarIdioma(filme.idioma);
+		return  FilmeRepo.save(filme);
 	}
 
 	// listagem de Filmes Geral

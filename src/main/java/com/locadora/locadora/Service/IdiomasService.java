@@ -7,7 +7,8 @@
 import com.locadora.locadora.Models.Idioma;
 import com.locadora.locadora.Repository.IdiomaRepository;
  
-  @Service public class IdiomasService {
+  @Service 
+  public class IdiomasService {
   
   @Autowired 
   IdiomaRepository IdiomaRepo;

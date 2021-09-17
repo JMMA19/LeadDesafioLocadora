@@ -3,6 +3,8 @@ package com.locadora.locadora.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,17 +27,16 @@ public class FilmesControler {
 	FilmesService FilmeService;
 
 
-	@PostMapping("/save")//Cadastro de Filmes / Atualiza caso passe a Id já cadastrada
-	public ResponseEntity<?> Salvarfilme(@RequestBody Filme filme) {
+	@PostMapping("/savef")//Cadastro de Filmes / Atualiza caso passe a Id já cadastrada
+	public ResponseEntity<?> Salvarfilme(@RequestBody  Filme filme) {
         	 try {
-        		 Filme ObjFilme = FilmeService.salvarFilme(filme);
-        		 if(ObjFilme.categoria == null || ObjFilme.idioma == null ) {
+        		 if(filme.categoria == null || filme.idioma == null ) {
         			 return new ResponseEntity<String>("Categoria ou Idioma não preenchido.", HttpStatus.BAD_REQUEST);
         		 }else {
-        			 return new ResponseEntity<Filme>(ObjFilme, HttpStatus.OK);
+        			 return new ResponseEntity<Filme>(filme, HttpStatus.OK);
 				}
 			} catch (Exception e) {
-				return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("mano deu ruim", HttpStatus.BAD_REQUEST);
 			}
 	}
 

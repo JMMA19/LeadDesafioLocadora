@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,10 @@ public class Idioma implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long ID;
+
+	@NotBlank(message = "Todos os Idiomas precisam de um Nome")
 	public String Nome;
-	public int Tag;
+	@NotBlank(message = "Todos os Idiomas precisam de uma TAG")
+	public String Tag;
 
 }
