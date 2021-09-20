@@ -25,7 +25,5 @@ public interface FilmesReposiory extends JpaRepository<Filme, Long> {
 	
 	List<Filme> findByCategoria(Categoria categoria);
 	
-	 //@Query(value = "select i from Filme i where i.categorias like ?1")
-	 //Optional<Filme> findByCat(long Idcat);
-
+	 
 }

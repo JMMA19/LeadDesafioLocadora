@@ -46,9 +46,13 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().disable().authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/Filmes/").hasAuthority("ADMIN")
-				.antMatchers(HttpMethod.POST, "/Filmes/showid").permitAll()
-			    .antMatchers(HttpMethod.POST,"/Auth").permitAll() 
+				.antMatchers(HttpMethod.POST,"/Auth").permitAll() 
+				.antMatchers(HttpMethod.POST, "/User/save").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.POST, "/Filmes/save").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.POST, "/Categoria/save").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.GET,"/Filmes/show/**").permitAll()
+				.antMatchers(HttpMethod.GET,"/Filmes/showTit/**").permitAll()
+				.antMatchers(HttpMethod.GET,"/Filmes/showCat/**").permitAll()
 				.anyRequest().authenticated() // obriga a autenticar user
 				.and().csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

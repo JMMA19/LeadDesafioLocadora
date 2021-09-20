@@ -40,8 +40,8 @@ public class Usuario implements Serializable, UserDetails {
 	@Size(max = 14, min = 1)
 	public String CPF;
 	
-	@NotBlank(message = "Todo os Usuarios precisam de um Telefone")
-	public int Telefone;
+	@NotNull(message = "Todo os Usuarios precisam de um Telefone")
+	public Integer Telefone;
 	
 	@NotBlank(message = "Todo os Usuarios precisam de um Email")
 	public String Email;

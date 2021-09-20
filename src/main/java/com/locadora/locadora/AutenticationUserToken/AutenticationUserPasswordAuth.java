@@ -1,4 +1,4 @@
-package com.locadora.locadora.Form;
+package com.locadora.locadora.AutenticationUserToken;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-public class LoginForm {
+public class AutenticationUserPasswordAuth {
 @Getter	@Setter
 private String CPF;
 @Getter	@Setter

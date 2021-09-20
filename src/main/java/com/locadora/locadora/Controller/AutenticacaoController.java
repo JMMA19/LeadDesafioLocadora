@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.locadora.locadora.Form.LoginForm;
+import com.locadora.locadora.AutenticationUserToken.AutenticationUserPasswordAuth;
 import com.locadora.locadora.SecurityConfig.TokenDto;
 import com.locadora.locadora.SecurityConfig.TokenServices;
 
@@ -27,7 +27,7 @@ private AuthenticationManager authManager;
 private TokenServices elson;
 
  	@PostMapping
-	public ResponseEntity<TokenDto> autenticarUser(@RequestBody @Valid LoginForm form) {
+	public ResponseEntity<TokenDto> autenticarUser(@RequestBody @Valid AutenticationUserPasswordAuth form) {
 		UsernamePasswordAuthenticationToken dadosAutenticacao =  form.converteCredenciais();
 		try {
 			Authentication authentication = authManager.authenticate(dadosAutenticacao);
